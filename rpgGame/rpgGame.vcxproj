@@ -144,6 +144,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Spells.cpp" />
     <ClCompile Include="Wiz.cpp" />
   </ItemGroup>
   <ItemGroup>

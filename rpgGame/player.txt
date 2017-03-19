@@ -1,0 +1,18 @@
+ClassName= Wizard
+Name= hgff
+Accuracy= 5
+HitPoints= 10
+MaxHitPoints= 10
+MagicPoints= 20
+MaxMagicPoints= 20
+ExpPoints= 500
+Gold= 2644
+NextLevelExp= 1000
+Level= 1
+Armor= 1
+WeaponName= Staff
+DamageLow= 1
+damageHigh 4
+SpellName= Ice Bolt
+DamageLow= 3
+DamageHigh 9

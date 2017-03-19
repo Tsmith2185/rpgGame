@@ -205,41 +205,51 @@ bool Player::attack(Monster& monster)
 		break;
 
 		case 2: // Spell
-			cout << "You use " << mSpell.mName
-				<< " on " << monster.getName() << endl;
-
-			if (Random(0, 20) < mAccuracy)
+			if (mMagicPoints >= mSpell.mMagicNeeded)
 			{
-				int damage = Random(mSpell.mDamageRange);
-				int spellDuration = 0;
-				int spellEffect = 0;
-				int totalDamage = damage - monster.getArmor();
+				mMagicPoints -= mSpell.mMagicNeeded;
 
-				if (totalDamage <= 0)
+				cout << "You use " << mSpell.mName
+					<< " on " << monster.getName() << endl;
+
+				if (Random(0, 20) < mAccuracy)
 				{
-					cout << "Your spell had no effect!" << endl;
+					int damage = Random(mSpell.mDamageRange);
+					int spellDuration = 0;
+					int spellEffect = 0;
+					int totalDamage = damage - monster.getArmor();
+
+					if (totalDamage <= 0)
+					{
+						cout << "Your spell had no effect!" << endl;
+					}
+					else
+					{
+						cout << "You use " << mSpell.mName << " for "
+							<< totalDamage << " damage!" << endl;
+
+						if (Random(1, 4))
+						{
+							spellEffect = 1;
+						}
+
+						// Subtrack from monster's hitpoints
+						monster.takeDamage(totalDamage, spellEffect);
+					}
 				}
 				else
 				{
-					cout << "You use " << mSpell.mName << " for " 
-						<< totalDamage << " damage!" << endl;
-					
-					if (Random(1, 4))
-					{
-						spellEffect = 1;
-					}
-
-					// Subtrack from monster's hitpoints
-					monster.takeDamage(totalDamage, spellEffect);
+					cout << "Your spell misses!" << endl;
 				}
+				cout << endl;
+				break;
 			}
 			else
 			{
-				cout << "Your spell misses!" << endl;
+				cout << "Your fingertips sparked but nothing happened!" << endl << endl;
+				break;
 			}
-			cout << endl;
-			break;
-
+	
 	case 3: // Item (to be added)
 		// 25% chance of being able to run.
 					break;
@@ -324,8 +334,9 @@ void Player::levelUp()
 			break;
 		}
 
-		// Give player full hitpoints whehn they level up.
+		// Give player full hitpoints and magic whehn they level up.
 		mHitPoints = mMaxHitPoints;
+		mMagicPoints = mMaxMagicPoints;
 
 		
 	}
@@ -336,6 +347,7 @@ void Player::rest()
 	cout << "Resting..." << endl;
 
 	mHitPoints = mMaxHitPoints;
+	mMagicPoints = mMaxMagicPoints;
 }
 
 void Player::viewStats()
@@ -398,6 +410,7 @@ void Player::gameover()
 void Player::displayHitPoints()
 {
 	cout << mName << "'s hitpoints = " << mHitPoints << endl;
+	cout << mName << "'s magic points = " << mMagicPoints<< endl;
 }
 
 void Player::save(ofstream& outFile)
