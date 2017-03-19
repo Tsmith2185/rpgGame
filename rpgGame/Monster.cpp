@@ -26,7 +26,7 @@ bool Monster::isDead()
 	return mHitPoints <= 0;
 }
 
-int Monster : getXPReward()
+int Monster::getXPReward()
 {
 	return mExpReward;
 }
@@ -56,7 +56,7 @@ void Monster::attack(Player& player)
 		// simulate armor weakening the attack.  Note that
 		// if the armor > damage this results in a nagative
 		// number.
-		int totalDamage = damate - player.getArmor();
+		int totalDamage = damage - player.getArmor();
 
 		// If totalDamage <= 0, then we say that, although
 		// the attack hit, it did not penetrate the armor.

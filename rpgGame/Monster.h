@@ -15,7 +15,7 @@ public:
 		int xpReward, int armor, const std::string& weaponName, 
 		int lowDamage, int highDamage);
 
-	bool isDead()l
+	bool isDead();
 
 	int          getXPReward();
 	std::string  getName();

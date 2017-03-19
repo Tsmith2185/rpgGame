@@ -7,5 +7,5 @@
 
 int Random(Range r);
 
-it Random(int a, int b)
+int Random(int a, int b);
 #endif //RANDOM_H

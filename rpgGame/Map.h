@@ -8,8 +8,8 @@
 
 class Map
 {
-Public:
-
+public:
+	
 	// Constructor.
 	Map();
 
