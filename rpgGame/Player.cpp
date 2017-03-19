@@ -14,8 +14,11 @@ Player::Player()
 	mAccuracy      =  0;
 	mHitPoints     =  0;
 	mMaxHitPoints  =  0;
+	mMagicPoints = 0;
+	mMaxMagicPoints = 0;
 	mExpPoints     =  0;
 	mNextLevelExp  =  0;
+	mGold = 0;
 	mLevel         =  0;
 	mArmor         =  0;
 	mWeapon.mName  = "Default Weapon Name";
@@ -59,55 +62,67 @@ void Player::createClass()
 	switch (characterNum)
 	{
 	case 1: // Fighter
-		mClassName     =  "Fighter";
-		mAccuracy      =  10;
-		mHitPoints     =  20;
-		mMaxHitPoints  =  20;
-		mExpPoints     =  0;
-		mNextLevelExp  =  1000;
-		mLevel         =  1;
-		mArmor         =  4;
-		mWeapon.mName  =  "Long Sword";
+		mClassName      =  "Fighter";
+		mAccuracy       =  10;
+		mHitPoints      =  20;
+		mMaxHitPoints   =  20;
+		mMagicPoints    =  0;
+		mMaxMagicPoints =  0;
+		mExpPoints      =  0;
+		mGold           =  0;
+		mNextLevelExp   =  1000;
+		mLevel          =  1;
+		mArmor          =  4;
+		mWeapon.mName   =  "Long Sword";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  8;
 		break;
 
 	case 2: // Wizard
-		mClassName     = "Wizard";
-		mAccuracy      =  5;
-		mHitPoints     =  10;
-		mMaxHitPoints  =  10;
-		mExpPoints     =  0;
-		mNextLevelExp  =  1000;
-		mLevel         =  1;
-		mArmor         =  1;
-		mWeapon.mName  =  "Staff";
+		mClassName      = "Wizard";
+		mAccuracy       =  5;
+		mHitPoints      =  10;
+		mMaxHitPoints   =  10;
+		mMagicPoints    =  20;
+		mMaxMagicPoints =  20;
+		mExpPoints      =  0;
+		mGold           =  0;
+		mNextLevelExp   =  1000;
+		mLevel          =  1;
+		mArmor          =  1;
+		mWeapon.mName   =  "Staff";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  4;
 		break;
 	case 3: // Cleric
-		mClassName     =  "Cleric";
-		mAccuracy      =  8;
-		mHitPoints     =  15;
-		mMaxHitPoints  =  15;
-		mExpPoints     =  0;
-		mNextLevelExp  =  1000;
-		mLevel         =  1;
-		mArmor         =  3;
-		mWeapon.mName  =  "Flail";
+		mClassName      =  "Cleric";
+		mAccuracy       =  8;
+		mHitPoints      =  15;
+		mMaxHitPoints   =  15;
+		mMagicPoints    =  10;
+		mMaxMagicPoints =  10;
+		mExpPoints      =  0;
+		mGold           =  0;
+		mNextLevelExp   =  1000;
+		mLevel          =  1;
+		mArmor          =  3;
+		mWeapon.mName   =  "Flail";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  6;
 		break;
 	case 4: // Thief
-		mClassName     =  "Thief";
-		mAccuracy      =  7;
-		mHitPoints     =  12;
-		mMaxHitPoints  =  12;
-		mExpPoints     =  0;
-		mNextLevelExp  =  1000;
-		mLevel         =  1;
-		mArmor         =  2;
-		mWeapon.mName  =  "Short Sword";
+		mClassName      =  "Thief";
+		mAccuracy       =  7;
+		mHitPoints      =  12;
+		mMaxHitPoints   =  12;
+		mMagicPoints    =  0;
+		mMaxMagicPoints =  0;
+		mExpPoints      =  0;
+		mGold           =  0;
+		mNextLevelExp   =  1000;
+		mLevel          =  1;
+		mArmor          =  2;
+		mWeapon.mName   =  "Short Sword";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  6;
 		break;
@@ -214,10 +229,13 @@ void Player::viewStats()
 	cout << "Name             =  " << mName << endl;
 	cout << "Class            =  " << mClassName << endl;
 	cout << "Accuracy         =  " << mAccuracy << endl;
-	cout << "Hitpoints        =  " << mHitPoints << endl;
-	cout << "MaxHitpoints     =  " << mMaxHitPoints << endl;
+	cout << "Hit points       =  " << mHitPoints << endl;
+	cout << "Max Hit points   =  " << mMaxHitPoints << endl;
+	cout << "Magic Points     =  " << mMagicPoints << endl;
+	cout << "Max Magic Points =  " << mMaxMagicPoints << endl;
 	cout << "XP               =  " << mExpPoints << endl;
 	cout << "XP for Next Lvl  =  " << mNextLevelExp << endl;
+	cout << "Gold             =  " << mGold << endl;
 	cout << "Level            =  " << mLevel << endl;
 	cout << "Armor            =  " << mArmor << endl;
 	cout << "Weapon Name      =  " << mWeapon.mName << endl;
@@ -234,7 +252,7 @@ void Player::victory(int xp)
 {
 	cout << "You won the battle!" << endl;
 	cout << "You win " << xp
-		<< " experience points!" << endl << endl;
+		<< " experience points!" << endl <<endl;
 
 	mExpPoints += xp;
 }
@@ -259,18 +277,21 @@ void Player::displayHitPoints()
 
 void Player::save(ofstream& outFile)
 {
-	outFile << "ClassName= "    << mClassName    << endl;
-	outFile << "Name= "         << mName         << endl;
-	outFile << "Accuracy= "     << mAccuracy     << endl;
-	outFile << "HitPoints= "    << mHitPoints    << endl;
-	outFile << "MaxHitPoints= " << mMaxHitPoints << endl;
-	outFile << "ExpPoints= "    << mExpPoints    << endl;
-	outFile << "NextLevelExp= " << mNextLevelExp << endl;
-	outFile << "Level= "        << mLevel        << endl;
-	outFile << "Armor= "        << mArmor        << endl;
-	outFile << "WeaponName= "   << mWeapon.mName << endl;
-	outFile << "DamageLow= "    << mWeapon.mDamageRange.mLow  << endl;
-	outFile << "damageHigh "    << mWeapon.mDamageRange.mHigh << endl;
+	outFile << "ClassName= "      << mClassName      << endl;
+	outFile << "Name= "           << mName           << endl;
+	outFile << "Accuracy= "       << mAccuracy       << endl;
+	outFile << "HitPoints= "      << mHitPoints      << endl;
+	outFile << "MaxHitPoints= "   << mMaxHitPoints   << endl;
+	outFile << "MagicPoints= "    << mMagicPoints    << endl;
+	outFile << "MaxMagicPoints= " << mMaxMagicPoints << endl;
+	outFile << "ExpPoints= "      << mExpPoints      << endl;
+	outFile << "Gold= "           << mGold           << endl;
+	outFile << "NextLevelExp= "   << mNextLevelExp   << endl;
+	outFile << "Level= "          << mLevel          << endl;
+	outFile << "Armor= "          << mArmor          << endl;
+	outFile << "WeaponName= "     << mWeapon.mName   << endl;
+	outFile << "DamageLow= "      << mWeapon.mDamageRange.mLow  << endl;
+	outFile << "damageHigh "      << mWeapon.mDamageRange.mHigh << endl;
 }
 
 void Player::load(ifstream& inFile)
@@ -281,6 +302,8 @@ void Player::load(ifstream& inFile)
 	inFile >> garbage >> mAccuracy;
 	inFile >> garbage >> mHitPoints;
 	inFile >> garbage >> mMaxHitPoints;
+	inFile >> garbage >> mMagicPoints;
+	inFile >> garbage >> mMaxMagicPoints;
 	inFile >> garbage >> mExpPoints;
 	inFile >> garbage >> mNextLevelExp;
 	inFile >> garbage >> mLevel;

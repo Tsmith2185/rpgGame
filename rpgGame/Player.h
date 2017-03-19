@@ -40,6 +40,9 @@ private:
 	int          mAccuracy;
 	int          mHitPoints;
 	int          mMaxHitPoints;
+	int          mMagicPoints;
+	int			 mMaxMagicPoints;
+	int			 mGold;
 	int          mExpPoints;
 	int          mNextLevelExp;
 	int          mLevel;

@@ -18,6 +18,7 @@ public:
 	bool isDead();
 
 	int          getXPReward();
+	int          getGoldReward();
 	std::string  getName();
 	int          getArmor();
 
@@ -30,6 +31,7 @@ private:
 	int          mHitPoints;
 	int          mAccuracy;
 	int          mExpReward;
+	int          mGoldReward;
 	int          mArmor;
 	Weapon       mWeapon;
 };
