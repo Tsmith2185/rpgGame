@@ -38,7 +38,6 @@ int main()
 	{
 		// Each loop cycle we output the player position and
 		// a selection menu.
-
 		gameMap.printPlayerPos();
 
 		int selection = 1;

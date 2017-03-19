@@ -37,6 +37,7 @@ private:
 	// Data Members
 	std::string  mName;
 	std::string  mClassName;
+	int          mClassNumber;
 	int          mAccuracy;
 	int          mHitPoints;
 	int          mMaxHitPoints;

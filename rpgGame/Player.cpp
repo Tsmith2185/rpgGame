@@ -11,6 +11,7 @@ Player::Player()
 {
 	mName          =  "Default";
 	mClassName     =  "Default";
+	mClassNumber   =  0;
 	mAccuracy      =  0;
 	mHitPoints     =  0;
 	mMaxHitPoints  =  0;
@@ -43,6 +44,7 @@ void Player::takeDamage(int damage)
 
 void Player::createClass()
 {
+	system("cls");
 	cout << endl; 
 	cout << "CHARACTER CLASS GENERATION" << endl;
 	cout << "==========================" << endl;
@@ -64,6 +66,7 @@ void Player::createClass()
 	{
 	case 1: // Fighter
 		mClassName      =  "Fighter";
+		mClassNumber    =  1;
 		mAccuracy       =  10;
 		mHitPoints      =  20;
 		mMaxHitPoints   =  20;
@@ -81,6 +84,7 @@ void Player::createClass()
 
 	case 2: // Wizard
 		mClassName      = "Wizard";
+		mClassNumber    =  2;
 		mAccuracy       =  5;
 		mHitPoints      =  10;
 		mMaxHitPoints   =  10;
@@ -97,6 +101,7 @@ void Player::createClass()
 		break;
 	case 3: // Cleric
 		mClassName      =  "Cleric";
+		mClassNumber    =  3;
 		mAccuracy       =  8;
 		mHitPoints      =  15;
 		mMaxHitPoints   =  15;
@@ -113,6 +118,7 @@ void Player::createClass()
 		break;
 	case 4: // Thief
 		mClassName      =  "Thief";
+		mClassNumber    =  4;
 		mAccuracy       =  7;
 		mHitPoints      =  12;
 		mMaxHitPoints   =  12;
@@ -198,20 +204,67 @@ void Player::levelUp()
 	{
 		cout << "You gained a level!" << endl;
 
+		int doGetMagic = 0;
+
 		// Increment level.
 		mLevel++;
 
 		// Set experience points required for next level.
 		mNextLevelExp = mLevel * mLevel * 1000;
 
-		// Increase stats randomly.
-		mAccuracy += Random(1, 3);
-		mMaxHitPoints += Random(2, 6);
-		mArmor += Random(1, 2);
+		// Level up stats based on class.
+		switch (mClassNumber) 
+		{
+		case 1: // Fighter
+			// Increase stats randomly.
+			mAccuracy += Random(1, 3);
+			mMaxHitPoints += Random(5, 10);
+			mArmor += Random(3, 4);
+				// 10% Chance of gaining magic ability.
+			doGetMagic = Random(1, 10);
+			if (doGetMagic == 1)
+			{
+				mMaxMagicPoints += Random(1, 2);
+			}
+			break;
+		case 2: // Wizard
+				// Increase stats randomly.
+			mAccuracy += Random(1, 3);
+			mMaxHitPoints += Random(1, 5);
+			mArmor += Random(1, 2);
+			mMaxMagicPoints += Random(5, 10);
+			break;
+		case 3: // Cleric
+				// Increase stats randomly.
+			mAccuracy += Random(2, 4);
+			mMaxHitPoints += Random(2, 6);
+			mArmor += Random(1, 3);
+			// 25% Chance of gaining magic ability.
+			doGetMagic = Random(1, 4);
+			if (doGetMagic == 1)
+			{
+				mMaxMagicPoints += Random(1, 2);
+			}
+			break;
+		case 4: // Thief
+				// Increase stats randomly.
+			mAccuracy += Random(2, 4);
+			mMaxHitPoints += Random(4, 8);
+			mArmor += Random(2, 3);
+			// 20% Chance of gaining magic ability.
+			doGetMagic = Random(1, 5);
+			if (doGetMagic == 1)
+			{
+				mMaxMagicPoints += Random(1, 2);
+			}
+			break;
+		}
 
 		// Give player full hitpoints whehn they level up.
 		mHitPoints = mMaxHitPoints;
-		}
+
+		
+	}
 }
 
 void Player::rest()
