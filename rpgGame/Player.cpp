@@ -25,6 +25,11 @@ Player::Player()
 	mWeapon.mName  = "Default Weapon Name";
 	mWeapon.mDamageRange.mLow   =  0;
 	mWeapon.mDamageRange.mHigh  =  0;
+	mSpell.mName                =  "Default Spell Name";
+	mSpell.mDamageRange.mLow    =  0;
+	mSpell.mDamageRange.mHigh   =  0;
+	mSpell.mSpellEffect         =  0;
+	mSpell.mMagicNeeded         =  0;
 }
 
 bool Player::isDead()
@@ -44,7 +49,6 @@ void Player::takeDamage(int damage)
 
 void Player::createClass()
 {
-	system("cls");
 	cout << endl; 
 	cout << "CHARACTER CLASS GENERATION" << endl;
 	cout << "==========================" << endl;
@@ -80,6 +84,11 @@ void Player::createClass()
 		mWeapon.mName   =  "Long Sword";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  8;
+		mSpell.mName                =  "No Spell";
+		mSpell.mDamageRange.mLow    =  0;
+		mSpell.mDamageRange.mHigh   =  0;
+		mSpell.mSpellEffect         =  0;
+		mSpell.mMagicNeeded         =  0;
 		break;
 
 	case 2: // Wizard
@@ -98,6 +107,11 @@ void Player::createClass()
 		mWeapon.mName   =  "Staff";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  4;
+		mSpell.mName                =  "Ice Bolt";
+		mSpell.mDamageRange.mLow    =  3;
+		mSpell.mDamageRange.mHigh   =  9;
+		mSpell.mSpellEffect         =  1;
+		mSpell.mMagicNeeded         =  3;
 		break;
 	case 3: // Cleric
 		mClassName      =  "Cleric";
@@ -115,6 +129,11 @@ void Player::createClass()
 		mWeapon.mName   =  "Flail";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  6;
+		mSpell.mName                =  "No Spell";
+		mSpell.mDamageRange.mLow    =  0;
+		mSpell.mDamageRange.mHigh   =  0;
+		mSpell.mSpellEffect         =  0;
+		mSpell.mMagicNeeded         =  0;
 		break;
 	case 4: // Thief
 		mClassName      =  "Thief";
@@ -132,6 +151,11 @@ void Player::createClass()
 		mWeapon.mName   =  "Short Sword";
 		mWeapon.mDamageRange.mLow   =  1;
 		mWeapon.mDamageRange.mHigh  =  6;
+		mSpell.mName                =  "No Spell";
+		mSpell.mDamageRange.mLow    =  0;
+		mSpell.mDamageRange.mHigh   =  0;
+		mSpell.mSpellEffect         =  0;
+		mSpell.mMagicNeeded         =  0;
 		break;
 	}
 }
@@ -142,20 +166,20 @@ bool Player::attack(Monster& monster)
 	// of course, extend this to let the player use an item,
 	// cast a spell, and so on.
 	int selection = 1;
-	cout << "1) Attack, 2) run: ";
+	cout << "1) Attack, 2) Use Spell, 3) Use Item, 4) Run: ";
 	cin >> selection;
 	cout << endl;
 
 	switch (selection)
 	{
-	case 1:
+	case 1: // Attack
 		cout << "You attack an " << monster.getName()
 			<< " with a " << mWeapon.mName << endl;
 
 		if (Random(0, 20) < mAccuracy)
 		{
 			int damage = Random(mWeapon.mDamageRange);
-
+			
 			int totalDamage = damage - monster.getArmor();
 
 			if (totalDamage <= 0)
@@ -165,11 +189,12 @@ bool Player::attack(Monster& monster)
 			}
 			else
 			{
+				int noSpell = 0;
 				cout << "You attack for " << totalDamage
 					<< " damage!" << endl;
 
 				// Subtrack from monster's hitpoints
-				monster.takeDamage(totalDamage);
+				monster.takeDamage(totalDamage, noSpell);
 			}
 		}
 		else
@@ -179,11 +204,51 @@ bool Player::attack(Monster& monster)
 		cout << endl;
 		break;
 
-	case 2:
-		// 25% chance of being able to run.
-		int roll = Random(1, 4);
+		case 2: // Spell
+			cout << "You use " << mSpell.mName
+				<< " on " << monster.getName() << endl;
 
-		if (roll == 1)
+			if (Random(0, 20) < mAccuracy)
+			{
+				int damage = Random(mSpell.mDamageRange);
+				int spellDuration = 0;
+				int spellEffect = 0;
+				int totalDamage = damage - monster.getArmor();
+
+				if (totalDamage <= 0)
+				{
+					cout << "Your spell had no effect!" << endl;
+				}
+				else
+				{
+					cout << "You use " << mSpell.mName << " for " 
+						<< totalDamage << " damage!" << endl;
+					
+					if (Random(1, 4))
+					{
+						spellEffect = 1;
+					}
+
+					// Subtrack from monster's hitpoints
+					monster.takeDamage(totalDamage, spellEffect);
+				}
+			}
+			else
+			{
+				cout << "Your spell misses!" << endl;
+			}
+			cout << endl;
+			break;
+
+	case 3: // Item (to be added)
+		// 25% chance of being able to run.
+					break;
+	
+	case 4: // Run Away
+		// 25% chance of being able to run.
+		int escape = Random(1, 4);
+
+		if (escape == 1)
 		{
 			cout << "You run away!" << endl;
 			return true; //<-- Return out of the function.
@@ -193,8 +258,7 @@ bool Player::attack(Monster& monster)
 			cout << "You could not escape!" << endl;
 			break;
 		}
-	}
-
+}
 	return false;
 }
 
@@ -353,6 +417,9 @@ void Player::save(ofstream& outFile)
 	outFile << "WeaponName= "     << mWeapon.mName   << endl;
 	outFile << "DamageLow= "      << mWeapon.mDamageRange.mLow  << endl;
 	outFile << "damageHigh "      << mWeapon.mDamageRange.mHigh << endl;
+	outFile << "SpellName= " << mSpell.mName << endl;
+	outFile << "DamageLow= " << mSpell.mDamageRange.mLow << endl;
+	outFile << "DamageHigh " << mSpell.mDamageRange.mHigh << endl;
 }
 
 void Player::load(ifstream& inFile)
@@ -372,4 +439,7 @@ void Player::load(ifstream& inFile)
 	inFile >> garbage >> mWeapon.mName;
 	inFile >> garbage >> mWeapon.mDamageRange.mLow;
 	inFile >> garbage >> mWeapon.mDamageRange.mHigh;
+	inFile >> garbage >> mSpell.mName;
+	inFile >> garbage >> mSpell.mDamageRange.mLow;
+	inFile >> garbage >> mSpell.mDamageRange.mHigh;
 }

@@ -13,7 +13,7 @@ class Monster
 public:
 	Monster(const std::string& name, int hp, int acc, 
 		int xpReward, int armor, const std::string& weaponName, 
-		int lowDamage, int highDamage);
+		int lowDamage, int highDamage, int spellEffect);
 
 	bool isDead();
 
@@ -23,7 +23,7 @@ public:
 	int          getArmor();
 
 	void attack(Player& player);
-	void takeDamage(int damage);
+	void takeDamage(int damage, int spellEffect);
 	void displayHitPoints();
 
 private:
@@ -34,6 +34,7 @@ private:
 	int          mGoldReward;
 	int          mArmor;
 	Weapon       mWeapon;
+	int          mSpellEffect;
 };
 
 #endif // MONSTER_H

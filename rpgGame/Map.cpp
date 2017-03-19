@@ -62,7 +62,7 @@ Monster* Map::checkRandomEncounter()
 	else if (roll >= 6 && roll <= 10)
 	{
 		monster = new Monster("Orc", 10, 8, 200, 1,
-			"Short Sword", 2, 7);
+			"Short Sword", 2, 7, 0);
 
 		cout << "You encountered an Orc!" << endl;
 		cout << "Prepare for battle!" << endl;
@@ -71,7 +71,7 @@ Monster* Map::checkRandomEncounter()
 	else if (roll >= 11 && roll <= 15)
 	{
 		monster = new Monster("Goblin", 6, 6, 100, 0,
-			"Dagger", 1, 5);
+			"Dagger", 1, 5, 0);
 
 		cout << "You encountered a Goblin!" << endl;
 		cout << "Prepare for battle!" << endl;
@@ -80,7 +80,7 @@ Monster* Map::checkRandomEncounter()
 	else if (roll >= 16 && roll <= 19)
 	{
 		monster = new Monster("Ogre", 20, 12, 500, 2,
-			"Club", 3, 8);
+			"Club", 3, 8, 0);
 
 		cout << "You encountered an Ogre!" << endl;
 		cout << "Prepare for battle!" << endl;
@@ -89,7 +89,7 @@ Monster* Map::checkRandomEncounter()
 	else if (roll == 20)
 	{
 		monster = new Monster("Orc Lord", 25, 15, 2000, 5,
-			"Two Handed Sword", 5, 20);
+			"Two Handed Sword", 5, 20, 0);
 
 		cout << "You encountered an Orc Lord!!!" << endl;
 		cout << "Prepare for battle!" << endl;

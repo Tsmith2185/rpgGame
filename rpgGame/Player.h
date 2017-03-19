@@ -4,6 +4,7 @@
 #define PLAYER_H
 
 #include "Weapon.h"
+#include "Spell.h"
 #include "Monster.h"
 #include <string>
 #include <fstream>
@@ -49,6 +50,7 @@ private:
 	int          mLevel;
 	int          mArmor;
 	Weapon		 mWeapon;
+	Spell        mSpell;
 };
 
 #endif // PLAYER_H

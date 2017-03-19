@@ -5,11 +5,12 @@
 #include "Monster.h"
 #include "Player.h"
 #include "Random.h"
+#include "Spell.h"
 using namespace std;
 
 Monster::Monster(const std::string& name, int hp, int acc,
 		int xpReward, int armor, const std::string& weaponName,
-		int lowDamage, int highDamage)
+		int lowDamage, int highDamage, int spellEffect)
 {
 	mName                       =  name;
 	mHitPoints                  =  hp;
@@ -19,6 +20,8 @@ Monster::Monster(const std::string& name, int hp, int acc,
 	mWeapon.mName               =  weaponName;
 	mWeapon.mDamageRange.mLow   =  lowDamage;
 	mWeapon.mDamageRange.mHigh  =  highDamage;
+	mSpellEffect                =  spellEffect;
+
 }
 
 bool Monster::isDead()
@@ -56,7 +59,17 @@ void Monster::attack(Player& player)
 		// simulate armor weakening the attack.  Note that
 		// if the armor > damage this results in a nagative
 		// number.
-		int totalDamage = damage - player.getArmor();
+		int totalDamage = 0;
+
+		if (mSpellEffect > 0)
+		{
+			cout << "The " << mName << " still feels the effects of your spell." << endl;
+			totalDamage = (damage / 2) - player.getArmor();
+		}
+		else
+		{
+			int totalDamage = damage - player.getArmor();
+		}
 
 		// If totalDamage <= 0, then we say that, although
 		// the attack hit, it did not penetrate the armor.
@@ -81,9 +94,10 @@ void Monster::attack(Player& player)
 	cout << endl;
 }
 
-void Monster::takeDamage(int damage)
+void Monster::takeDamage(int damage, int spellEffect)
 {
 	mHitPoints -= damage;
+	mSpellEffect = spellEffect;
 }
 
 void Monster::displayHitPoints()
