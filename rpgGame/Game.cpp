@@ -13,11 +13,24 @@ int main()
 
 	Map gameMap;
 
+	int startSelect = 0;
+	
 	Player mainPlayer;
 
-	ofstream outFile("Player.txt");
+	std::cout << "Welcome to RPG v.1.5" << endl
+		<< "1) Start a new game." << endl
+		<< "2) Load a saved game." << endl
+		<< "Please choose an option: ";
+	std::cin >> startSelect;
 
-	mainPlayer.createClass();
+	if (startSelect == 2)
+	{
+		ifstream inFile("player.txt");
+		mainPlayer.load(inFile);
+	}
+	else
+		mainPlayer.createClass();
+
 
 	// Begin Adventure.
 	bool done = false;
@@ -29,9 +42,11 @@ int main()
 		gameMap.printPlayerPos();
 
 		int selection = 1;
-		cout << "1) Move, 2) Rest, 3) View Stats, 4) Save, 5) Quit: ";
-		cin >> selection;
+		std::cout << "1) Move, 2) Rest, 3) View Stats, 4) Save, 5) Quit: ";
+		std::cin >> selection;
 
+		ofstream outFile("player.txt");
+		
 		Monster* monster = 0;
 		switch (selection)
 		{
@@ -53,7 +68,7 @@ int main()
 					// Display hitpoints
 					mainPlayer.displayHitPoints();
 					monster->displayHitPoints();
-					cout << endl;
+					std::cout << endl;
 
 					// Player's turn to attack first.
 					bool runAway = mainPlayer.attack(*monster);
@@ -95,9 +110,18 @@ int main()
 			mainPlayer.viewStats();
 			break;
 		case 4:
-			mainPlayer.save();
+				mainPlayer.save(outFile);
+			outFile.close();
 			break;
 		case 5:
+			int saveselect = 0;
+			std::cout << "Do you want to save? 1) Yes, 2) No: ";
+			std::cin >> saveselect;
+			if (saveselect = 1)
+			{
+				mainPlayer.save(outFile);
+				outFile.close();
+			}
 			done = true;
 			break;
 		}// End Switch Statement

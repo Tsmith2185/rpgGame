@@ -45,7 +45,9 @@ void Player::createClass()
 
 	// Input Character's Name.
 	cout << "Enter your character's name: ";
-	getline(cin, mName);
+	cin >> mName;
+	
+	cout << endl;
 
 	// Character Selection.
 	cout << "Please select a character class number..." << endl;

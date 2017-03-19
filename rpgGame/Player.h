@@ -6,6 +6,7 @@
 #include "Weapon.h"
 #include "Monster.h"
 #include <string>
+#include <fstream>
 
 class Player
 {
@@ -29,8 +30,8 @@ public:
 	void victory(int xp);
 	void gameover();
 	void displayHitPoints();
-	void save(ofstream& outFile);
-	void load(ifstream& inFile);
+	void save(std::ofstream& outFile);
+	void load(std::ifstream& inFile);
 
 private:
 	// Data Members
