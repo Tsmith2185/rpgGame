@@ -29,6 +29,8 @@ public:
 	void victory(int xp);
 	void gameover();
 	void displayHitPoints();
+	void save(ofstream& outFile);
+	void load(ifstream& inFile);
 
 private:
 	// Data Members

@@ -15,6 +15,8 @@ int main()
 
 	Player mainPlayer;
 
+	ofstream outFile("Player.txt");
+
 	mainPlayer.createClass();
 
 	// Begin Adventure.
@@ -27,7 +29,7 @@ int main()
 		gameMap.printPlayerPos();
 
 		int selection = 1;
-		cout << "1) Move, 2) Rest, 3) View Stats, 4) Quit: ";
+		cout << "1) Move, 2) Rest, 3) View Stats, 4) Save, 5) Quit: ";
 		cin >> selection;
 
 		Monster* monster = 0;
@@ -93,6 +95,9 @@ int main()
 			mainPlayer.viewStats();
 			break;
 		case 4:
+			mainPlayer.save();
+			break;
+		case 5:
 			done = true;
 			break;
 		}// End Switch Statement

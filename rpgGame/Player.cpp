@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Random.h"
 #include <string>
+#include <fstream>
 using namespace std;
 
 Player::Player()
@@ -252,4 +253,37 @@ void Player::gameover()
 void Player::displayHitPoints()
 {
 	cout << mName << "'s hitpoints = " << mHitPoints << endl;
+}
+
+void Player::save(ofstream& outFile)
+{
+	outFile << "ClassName= "    << mClassName    << endl;
+	outFile << "Name= "         << mName         << endl;
+	outFile << "Accuracy= "     << mAccuracy     << endl;
+	outFile << "HitPoints= "    << mHitPoints    << endl;
+	outFile << "MaxHitPoints= " << mMaxHitPoints << endl;
+	outFile << "ExpPoints= "    << mExpPoints    << endl;
+	outFile << "NextLevelExp= " << mNextLevelExp << endl;
+	outFile << "Level= "        << mLevel        << endl;
+	outFile << "Armor= "        << mArmor        << endl;
+	outFile << "WeaponName= "   << mWeapon.mName << endl;
+	outFile << "DamageLow= "    << mWeapon.mDamageRange.mLow  << endl;
+	outFile << "damageHigh "    << mWeapon.mDamageRange.mHigh << endl;
+}
+
+void Player::load(ifstream& inFile)
+{
+	string garbage;
+	inFile >> garbage >> mClassName;
+	inFile >> garbage >> mName;
+	inFile >> garbage >> mAccuracy;
+	inFile >> garbage >> mHitPoints;
+	inFile >> garbage >> mMaxHitPoints;
+	inFile >> garbage >> mExpPoints;
+	inFile >> garbage >> mNextLevelExp;
+	inFile >> garbage >> mLevel;
+	inFile >> garbage >> mArmor;
+	inFile >> garbage >> mWeapon.mName;
+	inFile >> garbage >> mWeapon.mDamageRange.mLow;
+	inFile >> garbage >> mWeapon.mDamageRange.mHigh;
 }
