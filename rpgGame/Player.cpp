@@ -43,6 +43,7 @@ void Player::takeDamage(int damage)
 
 void Player::createClass()
 {
+	cout << endl; 
 	cout << "CHARACTER CLASS GENERATION" << endl;
 	cout << "==========================" << endl;
 
@@ -250,11 +251,18 @@ void Player::viewStats()
 
 void Player::victory(int xp)
 {
+	int gold = 0;
+    
+	gold = (Random(100, 2000));
+
 	cout << "You won the battle!" << endl;
 	cout << "You win " << xp
-		<< " experience points!" << endl <<endl;
+		<< " experience points and " << gold 
+		<< " Gold!" << endl << endl;
 
 	mExpPoints += xp;
+	
+	mGold += gold;
 }
 
 void Player::gameover()
