@@ -100,8 +100,8 @@ int main()
 				delete monster;
 				monster = 0;
 			}
-
-			checkStoreEncounter()
+			/*
+			checkStoreEncounter();
 			{
 				int roll = Random(0, 20);
 
@@ -135,7 +135,7 @@ int main()
 
 			}
 			break;
-
+			*/
 		case 2:
 			mainPlayer.rest();
 			break;
