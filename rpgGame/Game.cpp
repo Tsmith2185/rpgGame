@@ -14,7 +14,8 @@ int main()
 	Map gameMap;
 
 	int startSelect = 0;
-	
+	int store = 0;
+	int checkStoreEncounter();
 	Player mainPlayer;
 
 	std::cout << "Welcome to RPG v.1.5" << endl
@@ -100,6 +101,39 @@ int main()
 				monster = 0;
 			}
 
+			checkStoreEncounter()
+			{
+				int roll = Random(0, 20);
+
+				int store = 0;
+
+				if (roll <= 15)
+				{
+					// No encounter, return a null pointer.
+					return 1;
+				}
+				else
+					return 0;
+			}
+			// 'store' not null, run store simulation.
+			if (store != 0)
+			{
+				// Loop until a 'break' statement.
+				while (true)
+				{
+					int select = 0;
+					cout << "This is the store Place holder" << endl
+						<< "To shop press 1, to leave press 2" << endl
+						<< "They all exit lol, gotcha!!!" << endl << endl;
+					break;
+				}
+				// The pointer to a monster returned from
+				// checkRandomEncounter was allocated with
+				// 'new', so we must delete it to avoid
+				// memory leaks.
+				store = 0;
+
+			}
 			break;
 
 		case 2:

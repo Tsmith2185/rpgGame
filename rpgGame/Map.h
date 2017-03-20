@@ -19,6 +19,7 @@ public:
 	void movePlayer();
 	Monster* checkRandomEncounter();
 	void printPlayerPos();
+	int checkStoreEncounter();
 
 private:
 	// Data members.

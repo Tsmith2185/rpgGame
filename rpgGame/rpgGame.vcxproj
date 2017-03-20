@@ -145,9 +145,11 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Spells.cpp" />
+    <ClCompile Include="Store.cpp" />
     <ClCompile Include="Wiz.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Armor.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Monster.h" />

@@ -99,6 +99,8 @@ Monster* Map::checkRandomEncounter()
 	return monster;
 }
 
+
+
 void Map::printPlayerPos()
 {
 	cout << "Player Position = (" << mPlayerXPos << ", "
