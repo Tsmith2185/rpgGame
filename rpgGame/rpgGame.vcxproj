@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -150,10 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Spell.h" />
+    <ClInclude Include="Store.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Range.h" />

@@ -106,3 +106,18 @@ void Map::printPlayerPos()
 	cout << "Player Position = (" << mPlayerXPos << ", "
 		<< mPlayerYPos << ")" << endl << endl;
 }
+
+int Map::checkStoreEncounter()
+{
+	int roll = Random(0, 20);
+
+	int store = 0;
+
+	if (roll <= 15)
+	{
+		// No encounter, return a null pointer.
+		return 1;
+	}
+	else
+		return 0;
+}

@@ -1,6 +1,10 @@
+/*Troubleshooting list
+looks like monsters cant hit anymore
+store wont come up*/
 // Main.cpp (The file with main.)
 
 #include "Map.h"
+#include "Store.h"
 #include "Player.h"
 #include <cstdlib>
 #include <ctime>
@@ -100,21 +104,9 @@ int main()
 				delete monster;
 				monster = 0;
 			}
-			/*
-			checkStoreEncounter();
-			{
-				int roll = Random(0, 20);
+			
+			gameMap.checkStoreEncounter();
 
-				int store = 0;
-
-				if (roll <= 15)
-				{
-					// No encounter, return a null pointer.
-					return 1;
-				}
-				else
-					return 0;
-			}
 			// 'store' not null, run store simulation.
 			if (store != 0)
 			{
@@ -124,7 +116,12 @@ int main()
 					int select = 0;
 					cout << "This is the store Place holder" << endl
 						<< "To shop press 1, to leave press 2" << endl
-						<< "They all exit lol, gotcha!!!" << endl << endl;
+						<< "They all exit lol, gotcha!!!" << endl
+						<< "Enter: ";
+					
+					cin >> select;
+					cout << endl << endl;
+					Store::Store();
 					break;
 				}
 				// The pointer to a monster returned from
@@ -135,7 +132,7 @@ int main()
 
 			}
 			break;
-			*/
+			
 		case 2:
 			mainPlayer.rest();
 			break;
